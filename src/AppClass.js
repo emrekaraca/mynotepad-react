@@ -37,6 +37,9 @@ export default class App extends React.Component {
         <div className="viewer">
           <p className="viewer--heading">Viewer:</p>
           <p id="viewer--text">{this.state.note}</p>
+          <p>
+            Length: <span id="viewer--length">0</span>
+          </p>
         </div>
       </div>
     );
