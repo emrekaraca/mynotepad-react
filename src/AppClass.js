@@ -9,6 +9,17 @@ export default class App extends React.Component {
     this.setState({ note: event.target.value });
   };
 
+  componentDidMount() {
+    const storedNote = localStorage.getItem("classNote");
+    if (storedNote) {
+      this.setState({ note: storedNote });
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("classNote", this.state.note);
+  }
+
   render() {
     return (
       <div id="app">

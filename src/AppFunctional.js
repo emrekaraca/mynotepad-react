@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function App() {
   const [note, setNote] = useState("");
   const handleChange = e => setNote(e.target.value);
+
+  // Only runs on mount
+  useEffect(() => {
+    const storedNote = localStorage.getItem("functionalNote");
+    if (storedNote) {
+      setNote(storedNote);
+    }
+  }, [setNote]);
+
+  // Runs on mount and every update
+  useEffect(() => {
+    localStorage.setItem("functionalNote", note);
+  });
 
   return (
     <div id="app">
