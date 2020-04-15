@@ -2,17 +2,21 @@ import React from "react";
 
 export default class App extends React.Component {
   state = {
-    note: ""
+    note: "",
+    noteLength: 0
   };
 
   handleChange = event => {
-    this.setState({ note: event.target.value });
+    this.setState({
+      note: event.target.value,
+      noteLength: event.target.value.length
+    });
   };
 
   componentDidMount() {
     const storedNote = localStorage.getItem("classNote");
     if (storedNote) {
-      this.setState({ note: storedNote });
+      this.setState({ note: storedNote, noteLength: storedNote.length });
     }
   }
 
@@ -38,7 +42,7 @@ export default class App extends React.Component {
           <p className="viewer--heading">Viewer:</p>
           <p id="viewer--text">{this.state.note}</p>
           <p>
-            Length: <span id="viewer--length">0</span>
+            Length: <span id="viewer--length">{this.state.noteLength}</span>
           </p>
         </div>
       </div>

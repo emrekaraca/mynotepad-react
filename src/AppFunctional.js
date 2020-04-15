@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 
 export default function App() {
   const [note, setNote] = useState("");
-  const handleChange = e => setNote(e.target.value);
+  const [noteLength, setNoteLength] = useState(0);
+  const handleChange = e => {
+    setNote(e.target.value);
+    setNoteLength(e.target.value.length);
+  };
 
   // Only runs on mount
   useEffect(() => {
     const storedNote = localStorage.getItem("functionalNote");
     if (storedNote) {
       setNote(storedNote);
+      setNoteLength(storedNote.length);
     }
   }, [setNote]);
 
@@ -34,7 +39,7 @@ export default function App() {
         <p className="viewer--heading">Viewer:</p>
         <p id="viewer--text">{note}</p>
         <p>
-          Length: <span id="viewer--length">0</span>
+          Length: <span id="viewer--length">{noteLength}</span>
         </p>
       </div>
     </div>
