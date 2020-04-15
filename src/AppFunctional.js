@@ -3,9 +3,13 @@ import React, { useState, useEffect } from "react";
 export default function App() {
   const [note, setNote] = useState("");
   const [noteLength, setNoteLength] = useState(0);
+  const [counter, setCounter] = useState(0);
   const handleChange = e => {
     setNote(e.target.value);
     setNoteLength(e.target.value.length);
+  };
+  const handleProcrastination = () => {
+    setCounter(counter + 1);
   };
 
   // Only runs on mount
@@ -20,11 +24,14 @@ export default function App() {
   // Runs on mount and every update
   useEffect(() => {
     localStorage.setItem("functionalNote", note);
-  });
+  }, [note]);
 
   return (
     <div id="app">
       <h1>My Notepad - Functional</h1>
+      <button onClick={handleProcrastination}>
+        My Procrastination Counter: {counter}
+      </button>
       <div className="notepad">
         <label htmlFor="my-note">Editor:</label>
         <textarea

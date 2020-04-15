@@ -3,7 +3,8 @@ import React from "react";
 export default class App extends React.Component {
   state = {
     note: "",
-    noteLength: 0
+    noteLength: 0,
+    counter: 0
   };
 
   handleChange = event => {
@@ -13,6 +14,10 @@ export default class App extends React.Component {
     });
   };
 
+  handeProcrastination = () => {
+    this.setState(state => ({ counter: state.counter + 1 }));
+  };
+
   componentDidMount() {
     const storedNote = localStorage.getItem("classNote");
     if (storedNote) {
@@ -20,14 +25,19 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem("classNote", this.state.note);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.note !== prevState.note) {
+      localStorage.setItem("classNote", this.state.note);
+    }
   }
 
   render() {
     return (
       <div id="app">
         <h1>My Notepad - Class</h1>
+        <button onClick={this.handeProcrastination}>
+          My Procrastination Counter: {this.state.counter}
+        </button>
         <div className="notepad">
           <label htmlFor="my-note">Editor:</label>
           <textarea
