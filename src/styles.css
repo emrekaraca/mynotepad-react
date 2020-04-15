@@ -1,0 +1,19 @@
+body {
+  font-family: sans-serif;
+  background-color: beige;
+}
+
+#app {
+  padding: 0 20px;
+}
+.notepad,
+.viewer {
+  display: flex;
+  flex-direction: column;
+}
+
+.notepad label,
+.viewer .viewer--heading {
+  font-size: 24px;
+  font-weight: bold;
+}
